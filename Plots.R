@@ -1,3 +1,29 @@
+# Plot the power curves used in wpcm
+png(file="~/desktop/noBirdsEver.png",width=2*400, height=2*350)
+siz=1
+v=seq(3,20,0.1)
+cols=c('black','salmon','blue',"green")
+par(mar=rep(4.5,4.5))
+
+plot(v,wpcm(v,1)/1000,
+     ylab="Power [kW]",
+     xlab='Wind Speed [m/s]',
+     ylim=c(0,100),
+     cex=siz,
+)
+
+for (i in 2:4)
+{
+  points(v,wpcm(v,i),col=cols[i],cex=siz)  
+}
+
+legend(x = 3,y=100,
+       legend = c('Bergy 10 kW','Aeolos-H 50 kW','Endurance 50 kW','Northern 100 kW'),
+       fill =cols,
+       cex=0.75)
+dev.off()
+
+# ----------------------------------------------------
 # Create histogram of energy generated per day density
 hist(Inverter.dat$Watts,
      breaks = 200,
